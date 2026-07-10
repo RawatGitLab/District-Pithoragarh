@@ -2,7 +2,7 @@
 
 An interactive, map-based portal for Almora District, built with React, TypeScript, Leaflet, and the Google Gemini API. The app lets citizens and administrators explore geospatial data, layers, and district information through a fast, modern web interface.
 
-Live demo: https://district-Pithoragarh.onrender.com/
+Live demo: https://district-Pithoragarh.onrender.com/ 
 
 📖 About
 This repository hosts the Pithoragarh GIS Viewer — a web application for visualizing geographic and administrative data for Pithoragarh District, Uttarakhand. It combines an interactive Leaflet map with an Express/Node backend and Gemini-powered AI capabilities.
