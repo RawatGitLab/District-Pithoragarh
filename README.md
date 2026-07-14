@@ -1,6 +1,6 @@
 # 🗺️ District Pithoragarh – GIS Viewer
 
-An interactive, map-based portal for **pithoragarh District**, built with React, TypeScript, Leaflet, and the Google Gemini API. The app lets citizens and administrators explore geospatial data, layers, and district information through a fast, modern web interface.
+An interactive, map-based portal for **Pithoragarh District**, built with React, TypeScript and Leaflet. The app lets citizens and administrators explore geospatial data, layers, and district information through a fast, modern web interface.
 
 > **Live demo:** https://district-pithoragarh.onrender.com/
 
@@ -8,7 +8,7 @@ An interactive, map-based portal for **pithoragarh District**, built with React,
 
 ## 📖 About
 
-This repository hosts the **pithoragarh GIS Viewer** — a web application for visualizing geographic and administrative data for pithoragarh District, Uttarakhand. It combines an interactive Leaflet map with an Express/Node backend and Gemini-powered AI capabilities, and was bootstrapped from the [`google-gemini/aistudio-repository-template`](https://github.com/google-gemini/aistudio-repository-template).
+This repository hosts the **Pithoragarh GIS Viewer** — a web application for visualizing geographic and administrative data for Pithoragarh District, Uttarakhand.
 
 ## ✨ Features
 
@@ -26,7 +26,6 @@ This repository hosts the **pithoragarh GIS Viewer** — a web application for v
 |---|---|
 | Frontend | React 19, TypeScript, Vite, Tailwind CSS |
 | Mapping | Leaflet, proj4 |
-| AI | Google Gemini (`@google/genai`) |
 | Backend | Node.js, Express, tsx |
 | Database | MongoDB |
 | Animation / UI | Motion, Lucide React |
@@ -35,7 +34,7 @@ This repository hosts the **pithoragarh GIS Viewer** — a web application for v
 ## 📂 Project Structure
 
 ```
-District-pithoragarh/
+District-Pithoragarh/
 ├── src/                  # Application source (components, map logic, etc.)
 ├── index.html            # App entry HTML
 ├── server.ts             # Express server entry point
@@ -54,16 +53,15 @@ District-pithoragarh/
 
 - [Node.js](https://nodejs.org/) (LTS recommended)
 - npm
-- A [Gemini API key](https://aistudio.google.com/apikey)
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/RawatGitLab/District-pithoragarh.git
+git clone https://github.com/RawatGitLab/District-Pithoragarh.git
 
 # Navigate into the project directory
-cd District-pithoragarh
+cd District-Pithoragarh
 
 # Install dependencies
 npm install
@@ -79,7 +77,6 @@ cp .env.example .env
 
 | Variable | Description |
 |---|---|
-| `GEMINI_API_KEY` | Required for Gemini AI API calls |
 | `APP_URL` | The URL where the app is hosted (used for self-referential links/callbacks) |
 
 ### Available Scripts
@@ -124,8 +121,8 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 
 ## 📞 Contact
 
-For queries or issues related to this project, reach out via the repository's [Issues](https://github.com/RawatGitLab/District-pithoragarh/issues) page.
+For queries or issues related to this project, reach out via the repository's [Issues](https://github.com/RawatGitLab/District-Pithoragarh/issues) page.
 
 ---
 
-<p align="center">Built for pithoragarh District 🏔️</p>
+<p align="center">Built for Pithoragarh District 🏔️</p>
