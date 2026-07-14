@@ -5,6 +5,10 @@ async function run() {
   await client.connect();
   const db = client.db(MONGODB_DB);
   const collection = db.collection(MONGODB_COLLECTION);
+
+  const MONGODB_URI = process.env.MONGODB_URI;
+  const MONGODB_DB = process.env.MONGODB_DB;
+  const MONGODB_COLLECTION = process.env.MONGODB_COLLECTION;
   
   // Find all distinct layer names
   const layers = await collection.distinct("layer");
