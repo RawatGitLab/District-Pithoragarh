@@ -1,9 +1,5 @@
 import { MongoClient } from "mongodb";
 
-const MONGODB_URI = "mongodb+srv://varunrawatmailbox2507_db_user:GYVPiF8LG4HIbsSF@cluster0.8xfepsq.mongodb.net/?appName=Cluster0";
-const MONGODB_DB = "Shapefile";
-const MONGODB_COLLECTION = "Pithoragarh";
-
 async function run() {
   const client = new MongoClient(MONGODB_URI);
   await client.connect();
