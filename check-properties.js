@@ -1,8 +1,5 @@
 import { MongoClient } from "mongodb";
 
-const MONGODB_URI = "mongodb+srv://varunrawatmailbox2507_db_user:GYVPiF8LG4HIbsSF@cluster0.8xfepsq.mongodb.net/?appName=Cluster0";
-const MONGODB_DB = "Shapefile";
-const MONGODB_COLLECTION = "Pithoragarh";
 import proj4 from "proj4";
 
 const UTM_44N = "+proj=utm +zone=44 +ellps=evrst30 +towgs84=283,682,225,0,0,0,0 +units=m +no_defs";
