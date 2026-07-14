@@ -15,6 +15,10 @@ const zone43Converter = proj4(UTM_43N, WGS_84);
 const UTM_45N = "+proj=utm +zone=45 +ellps=WGS84 +datum=WGS84 +units=m +no_defs";
 const zone45Converter = proj4(UTM_45N, WGS_84);
 
+const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_DB = process.env.MONGODB_DB;
+const MONGODB_COLLECTION = process.env.MONGODB_COLLECTION;
+
 async function run() {
   const client = new MongoClient(MONGODB_URI);
   await client.connect();
