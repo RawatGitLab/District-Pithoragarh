@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar";
 import MapComponent from "./components/MapComponent";
 import AttributeTable from "./components/AttributeTable";
 import ThemeToggle from "./components/ThemeToggle";
+import Login from "./components/Login";
 import { 
   Database, 
   Layers, 
@@ -17,7 +18,8 @@ import {
   Sparkles, 
   Info,
   ServerCrash,
-  RefreshCw
+  RefreshCw,
+  LogOut
 } from "lucide-react";
 
 export default function App() {
@@ -25,6 +27,21 @@ export default function App() {
   const [layers, setLayers] = useState<LayerConfig[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Authentication State
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    return sessionStorage.getItem("geoportal_auth") === "true";
+  });
+
+  const handleLoginSuccess = () => {
+    sessionStorage.setItem("geoportal_auth", "true");
+    setIsAuthenticated(true);
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("geoportal_auth");
+    setIsAuthenticated(false);
+  };
 
   // Map & Interaction state
   const [activeBaseMap, setActiveBaseMap] = useState<string>("osm");
@@ -39,10 +56,7 @@ export default function App() {
   const [measurePoints, setMeasurePoints] = useState<{ lat: number; lng: number }[]>([]);
 
   // Theme State (Default to Light Mode)
-  const [theme, setTheme] = useState<"light" | "dark">(() => {
-    const saved = localStorage.getItem("theme");
-    return saved === "dark" ? "dark" : "light";
-  });
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
     if (theme === "dark") {
@@ -387,6 +401,16 @@ export default function App() {
             <Database className="w-3.5 h-3.5 text-pink-400" />
             <span>Entities: <strong className="text-white font-mono">{features.length}</strong></span>
           </div>
+
+          {/* Logout Button */}
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-1.5 bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white font-extrabold px-3 py-1.5 rounded-lg text-xs shadow-md transition duration-150 cursor-pointer select-none"
+            title="Sign out of Geoportal"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+            <span>Logout</span>
+          </button>
         </div>
       </header>
 
@@ -490,6 +514,16 @@ export default function App() {
           </>
         )}
       </main>
+
+      {/* Login Screen Overlay */}
+      {!isAuthenticated && (
+        <Login
+          onLoginSuccess={handleLoginSuccess}
+          districtName="Pithoragarh"
+          theme={theme}
+          onToggleTheme={toggleTheme}
+        />
+      )}
     </div>
   );
 }
