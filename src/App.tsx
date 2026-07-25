@@ -26,7 +26,7 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
 
   // Map & Interaction state
-  const [activeBaseMap, setActiveBaseMap] = useState<string>("satellite");
+  const [activeBaseMap, setActiveBaseMap] = useState<string>("osm");
   const [selectedFeature, setSelectedFeature] = useState<GisFeature | null>(null);
   const [hoveredFeature, setHoveredFeature] = useState<GisFeature | null>(null);
   const [isTableCollapsed, setIsTableCollapsed] = useState<boolean>(true);
@@ -201,15 +201,15 @@ export default function App() {
       const type = layerTypes[name] || "unknown";
       
       // Determine elegant theme coloring based on standard GIS mapping schemas
-      let color = "#6366f1"; // default indigo
-      let fillColor = "#818cf8";
+      let color = "#000000"; // default black
+      let fillColor = "transparent";
       let weight = 2;
       let opacity = 0.85;
-      let fillOpacity = 0.4;
+      let fillOpacity = 0;
 
       const lowerName = name.toLowerCase();
       if (type === "polygon") {
-        color = "#ffffff"; // All Polygon layers hollow with white boundary by default
+        color = "#000000"; // All Polygon layers hollow with black boundary by default
         fillColor = "transparent";
         weight = 2.5;
         opacity = 1.0;
