@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dark .leaflet-bar a {
+  background-color: #0f172a !important;
+  color: #e2e8f0 !important;
+  border-bottom-color: #1e293b !important;
+}
+
+.dark .leaflet-bar a:hover {
+  background-color: #1e293b !important;
+  color: #ffffff !important;
+}
+
+.dark .leaflet-bar {
+  border-color: #1e293b !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+}

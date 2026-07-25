@@ -3,6 +3,7 @@ import { GisFeature, LayerConfig, BaseMap } from "./types";
 import Sidebar from "./components/Sidebar";
 import MapComponent from "./components/MapComponent";
 import AttributeTable from "./components/AttributeTable";
+import ThemeToggle from "./components/ThemeToggle";
 import { 
   Database, 
   Layers, 
@@ -36,6 +37,25 @@ export default function App() {
   // Dynamic Measurement state (Distance & Area)
   const [measureMode, setMeasureMode] = useState<"none" | "distance" | "area">("none");
   const [measurePoints, setMeasurePoints] = useState<{ lat: number; lng: number }[]>([]);
+
+  // Theme State (Default to Light Mode)
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    const saved = localStorage.getItem("theme");
+    return saved === "dark" ? "dark" : "light";
+  });
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  };
 
   // Standard Basemaps (free of credentials)
   const baseMaps: BaseMap[] = useMemo(() => [
@@ -343,12 +363,13 @@ export default function App() {
                 Live Server
               </span>
             </div>
-            <h2 className="text-base font-bold tracking-tight text-slate-200">District Pithoragarh</h2>
+            <h2 className="text-base font-bold tracking-tight text-slate-200">District Pithoragarh [Code: 062]</h2>
           </div>
         </div>
 
         {/* Global summary specs */}
         <div className="flex items-center space-x-3 text-xs font-semibold text-slate-300">
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
           <button
             onClick={() => fetchFeatures(true)}
             disabled={loading}
@@ -452,6 +473,8 @@ export default function App() {
               zoomToLayerName={zoomToLayerName}
               clearZoomToLayer={() => setZoomToLayerName(null)}
               toggleLayer={toggleLayer}
+              theme={theme}
+              onToggleTheme={toggleTheme}
             />
 
             {/* Right Pane Attribute Table */}
