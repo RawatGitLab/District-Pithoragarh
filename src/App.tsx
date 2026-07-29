@@ -41,6 +41,8 @@ export default function App() {
   const handleLogout = () => {
     sessionStorage.removeItem("geoportal_auth");
     setIsAuthenticated(false);
+    setIsSidebarCollapsed(true);
+    setIsTableCollapsed(true);
   };
 
   // Map & Interaction state
@@ -468,14 +470,17 @@ export default function App() {
               baseMaps={baseMaps}
               onReset={handleResetToExtent}
               totalFeatures={features.length}
-              isCollapsed={isSidebarCollapsed}
-              setIsCollapsed={setIsSidebarCollapsed}
+              isCollapsed={!isAuthenticated || isSidebarCollapsed}
+              setIsCollapsed={(collapsed) => {
+                if (isAuthenticated) setIsSidebarCollapsed(collapsed);
+              }}
               onZoomToLayer={setZoomToLayerName}
               toggleAllLayers={toggleAllLayers}
               measureMode={measureMode}
               setMeasureMode={setMeasureMode}
               measurePoints={measurePoints}
               setMeasurePoints={setMeasurePoints}
+              disabled={!isAuthenticated}
             />
 
             {/* Center Map Workboard */}
@@ -488,9 +493,11 @@ export default function App() {
               onFeatureSelect={setSelectedFeature}
               hoveredFeature={hoveredFeature}
               setHoveredFeature={setHoveredFeature}
-              isTableCollapsed={isTableCollapsed}
-              setIsTableCollapsed={setIsTableCollapsed}
-              isSidebarCollapsed={isSidebarCollapsed}
+              isTableCollapsed={!isAuthenticated || isTableCollapsed}
+              setIsTableCollapsed={(collapsed) => {
+                if (isAuthenticated) setIsTableCollapsed(collapsed);
+              }}
+              isSidebarCollapsed={!isAuthenticated || isSidebarCollapsed}
               measureMode={measureMode}
               measurePoints={measurePoints}
               setMeasurePoints={setMeasurePoints}
@@ -507,9 +514,12 @@ export default function App() {
               layers={layers}
               selectedFeature={selectedFeature}
               onFeatureSelect={setSelectedFeature}
-              isCollapsed={isTableCollapsed}
-              setIsCollapsed={setIsTableCollapsed}
+              isCollapsed={!isAuthenticated || isTableCollapsed}
+              setIsCollapsed={(collapsed) => {
+                if (isAuthenticated) setIsTableCollapsed(collapsed);
+              }}
               onRefresh={() => fetchFeatures(true)}
+              disabled={!isAuthenticated}
             />
           </>
         )}

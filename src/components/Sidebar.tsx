@@ -22,6 +22,7 @@ interface SidebarProps {
   setMeasureMode: (mode: "none" | "distance" | "area") => void;
   measurePoints: { lat: number; lng: number }[];
   setMeasurePoints: React.Dispatch<React.SetStateAction<{ lat: number; lng: number }[]>>;
+  disabled?: boolean;
 }
 
 const ORIGINAL_LAYERS = new Set([
@@ -184,7 +185,8 @@ export default function Sidebar({
   measureMode,
   setMeasureMode,
   measurePoints,
-  setMeasurePoints
+  setMeasurePoints,
+  disabled = false
 }: SidebarProps) {
   const [isLayersCollapsed, setIsLayersCollapsed] = useState<boolean>(true);
   const [isBaseMapCollapsed, setIsBaseMapCollapsed] = useState<boolean>(true);
@@ -439,11 +441,12 @@ export default function Sidebar({
 
   if (isCollapsed) {
     return (
-      <aside className="w-12 border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 flex flex-col items-center pt-16 pb-4 h-full shrink-0 shadow-sm font-sans transition-all duration-300">
+      <aside className={`w-12 border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 flex flex-col items-center pt-16 pb-4 h-full shrink-0 shadow-sm font-sans transition-all duration-300 ${disabled ? "pointer-events-none opacity-40 select-none" : ""}`}>
         <button
-          onClick={() => setIsCollapsed(false)}
-          title="Open Map Controller"
-          className="p-2 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-md hover:bg-indigo-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm transition duration-150 mt-4 mb-8 cursor-pointer"
+          onClick={() => !disabled && setIsCollapsed(false)}
+          disabled={disabled}
+          title={disabled ? "Authentication required" : "Open Map Controller"}
+          className={`p-2 text-slate-600 dark:text-slate-300 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm transition duration-150 mt-4 mb-8 ${disabled ? "cursor-not-allowed opacity-50" : "hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-slate-800 cursor-pointer"}`}
         >
           <Maximize2 className="w-4 h-4" />
         </button>
@@ -456,7 +459,7 @@ export default function Sidebar({
   }
 
   return (
-    <aside className="w-80 border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 flex flex-col h-full shrink-0 shadow-sm font-sans">
+    <aside className={`w-80 border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 flex flex-col h-full shrink-0 shadow-sm font-sans ${disabled ? "pointer-events-none opacity-40 select-none" : ""}`}>
       {/* Sidebar Header */}
       <div className="p-4 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-between">
         <div className="flex items-center space-x-2">
